@@ -2,7 +2,7 @@ use Rack::Static,
 
 
 :urls => ["/img", "/js", "/css", "/test"],
-:root => "."
+:root => "ARIA_Project"
 
 run lambda { |env|
   [
