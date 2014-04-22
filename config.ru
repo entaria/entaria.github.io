@@ -11,6 +11,6 @@ run lambda { |env|
           #'Content-Type'  => 'text/html',
           'Cache-Control' => '., max-age=86400'
       },
-      File.open('ARIA_Project/index.html', File::RDONLY)
+      File.open('ARIA_Project/index_hk1.html', File::RDONLY)
   ]
 }
