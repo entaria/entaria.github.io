@@ -2,60 +2,44 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" data-framework="angularjs"  > <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">        
-        
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<link rel="shortcut icon" type="image/ico" href="entaria_favicon.ico"/>
 		
-		<!-- Custom styles for this template -->
-		<link href="css/justified-nav.css" rel="stylesheet">
-		<!-- <link href="css/jumbotron-narrow.css" rel="stylesheet"> -->
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-                
+		<!-- Custom styles for this template -->
+		<link href="css/justified-nav.css" rel="stylesheet">
+		<!-- <link href="css/jumbotron-narrow.css" rel="stylesheet"> -->
+		
+		<script src="js/vendor/angular.min.js"></script>
+		<script src="js/vendor/angular-route.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+		<script src="js/angular-animate.min.js"></script>			
+		<script src="js/vendor/jquery-1.10.2.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+		<!-- Brendan's Stuff  -->
+        <link href="css/FeedEk.css" rel="stylesheet" type="text/css" />
 
-
-
-
-      <!-- HXK CODE -->
-
-        <!--
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-        <style type="text/css">
-            html { height: 100% }
-            body { height: 100%; margin: 0; padding: 0 }
-            #map-canvas { height: 100% }
-        </style>
-        <script type="text/javascript"
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXMEss-vsF1qa8m75hh2pF1dMuu77Q1tk&sensor=true">
-        </script>
-        <script type="text/javascript">
-            function initialize() {
-                var mapOptions = {
-                    center: new google.maps.LatLng(53.350, -6.240),
-                    zoom: 9
-                };
-                var map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
-            }
-            google.maps.event.addDomListener(window, 'load', initialize);
-        </script>
+		<!-- Canvas files -->
+		<script src="Sales.js"></script>
+		<script src="js/createLocalStore.js"></script>
+		
+        <!--        
+		<base href="/Users/ADRIAN/Desktop/Masters/aria/ARIA_Project/index.html">
         -->
-        
-        
-        
-        
-        
-        
+
         <!-- GOOGLE MAPS (interactive) --->
         <meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
         <style type="text/css">
@@ -129,20 +113,12 @@
             }            
 
 			google.maps.event.addDomListener(window, 'load', initialize);
-
-
         </script>
-
-        
-        
         <!-- HXK CODE -->
 
-
-
-
-
-
-
+		<!-- Adrian's canvas example -->
+		<script type="text/javascript" src="js/vendor/canvasjs.min.js"></script>
+		<script type="text/javascript" src="js/canvas_display_options_adrian.js"></script>
 
     </head>
     <body onload="initialize()">
@@ -154,16 +130,20 @@
 		
 		
       <div class="container">
-
       <div class="masthead">
 		<div class="navbar-collapse collapse">
           <form class="navbar-form navbar-left" role="form">
-          
-          <!-- HXK CODE -->  
-          <img src="img/EntariaLogo.JPG" width="95px" height="107px" />
-          <!-- HXK CODE -->  
-
+			<img src="img/EntariaLogo.JPG" width="95px" height="107px" />
 		  </form>
+          <div id="weather">
+
+            <h3>The current Temperature  is </h3>
+            <input id="resultID" type="number" /> 
+            <div class="value" id ="tempValue"></div>
+            <div class="unit">°</div>
+            <input id="imgresultID" type="image" src="http://icons-ak.wxug.com/i/c/k/cloudy.gif"/>
+            <!--        <img id="btmpnl" src ="img\v8liv.PNG" />     -->
+          </div>
           <form class="navbar-form navbar-right" role="form">
             <div class="form-group">
               <input type="text" placeholder="Email" class="form-control">
@@ -176,14 +156,14 @@
           </form>
         </div><!--/.navbar-collapse -->
         <ul class="nav nav-justified">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">News</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
+	  
+	  <br />
 
-      
       <!-- HXK CODE -->
       <!-- AddThis Smart Layers BEGIN -->
         <!-- Go to http://www.addthis.com/get/smart-layers to customize -->
@@ -205,9 +185,13 @@
             <a class="twitter-timeline" href="https://twitter.com/search?q=%23coffee" data-widget-id="457884442518749185">Tweets about "#coffee"</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
         </div>
-        <div class="col-lg-9">
+        <div class="col-lg-6">
             <h3 class="section-title">Good Coffee around Town</h3>
             <div id="map-canvas" style="width:800px; height:500px"/></div>
+        </div>
+        <div class="col-lg-3">
+            <div id="divRss"></div>
+            <div class="content"></div>
         </div>
               
      </div>
@@ -215,55 +199,91 @@
       <!-- HXK CODE -->
       
 
-      <div class="jumbotron">
-        <h1>Jumbotron heading</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
-      </div>
+
+
+	  <!-- Jumbotron -->
+      <div class="jumbotron" >
+		<div class="container-slider" ng-app="website" ng-controller="SliderController">
+			<img class="img-responsive" ng-repeat="slide in slides" class="slide slide-animation"
+				ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.image}}">
+				
+			<div class="arrows-left">
+				<a href="#" ng-click="prev()" ><img src="img/left-arrow.png"/></a> 
+			</div>
+			<div class="arrows-right">
+				<a href="#" ng-click="next()"><img src="img/right-arrow.png"/></a>
+			</div>
+			
+			<div class="slider-info">
+                    <p ng-class="{'active':!isCurrentSlideIndex($index)}" class="slide slide-animation" ng-repeat="slide in slides"
+                      ng-click="setCurrentSlideIndex($index);" ng-hide="!isCurrentSlideIndex($index)">{{slide.title}}</p>
+					  
+                    <p ng-class="{'active':!isCurrentSlideIndex($index)}" class="slide slide-animation" ng-repeat="slide in slides"
+                      ng-click="setCurrentSlideIndex($index);" ng-hide="!isCurrentSlideIndex($index)">{{slide.description}}</p>
+			</div>
+			
+			
+		</div>
+      </div>  
+	  
+      <br />
 
       <div class="row marketing">
-        <div class="col-lg-2">
-          <h4>Latest News 1</h4>
+      	  <div class="col-md-2">
+		  <h3>Blog</h3>
+          <h4>Blog 1</h4>
           <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
 
-          <h4>Latest News 2</h4>
+          <h4>Blog 2</h4>
           <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
 
-          <h4>Latest News 3</h4>
+          <h4>Blog 3</h4>
           <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
+          </div>
 
-        <div class="col-lg-8">
-          <h4>Main Content</h4>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet lectus at quam aliquet porta eu a lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus dapibus pharetra. Proin dolor massa, cursus sed faucibus ac, iaculis quis arcu. Sed sem lacus, aliquet quis diam non, molestie mollis magna. Etiam aliquam vulputate hendrerit. Nullam blandit cursus libero, at viverra odio dapibus vel. Quisque congue sapien a ullamcorper egestas. Cras tincidunt interdum urna, a varius felis sagittis sit amet. Fusce accumsan lectus felis. Quisque porta nisl fringilla, cursus nulla sed, fermentum magna. Aenean venenatis tristique mauris non consectetur.
+          <div  class="col-md-8"   >
+			  <h3  >Main Content</h3>
+			  
+			  <div  ng-view><p ng-app="spaApp" ng-controller="spaController" id="main"> {{ greeting }} </p></div>
+			  
+			  <br />
+			  <button type="button" class="btn btn-default" id="doughnut" >Doughnut</button>
+			  <button type="button" class="btn btn-default" id="pie" >Pie</button>
+			  <button type="button" class="btn btn-default" id="column" >Column</button>
+			  <button type="button" class="btn btn-default" id="line" >Line</button>
+			  <button type="button" class="btn btn-default" id="area" >Area</button>
+			  <button type="button" class="btn btn-default" id="bar" >Bar</button>
+			  
+			  <div id="chartContainer" style="height: 300px; width: 100%;">
+					
+			   </div>
+			  
+			  
+		   </div>
+		   <div class="col-md-2">
+			  <img src="img/advert.jpg" width="160px" height="600px" />
+          </div>
 
-		Suspendisse lacinia odio eget nunc laoreet euismod. Sed fringilla, massa eu hendrerit varius, tortor leo bibendum libero, non pulvinar leo sapien at arcu. Aenean orci massa, lacinia eu luctus nec, sollicitudin at massa. Pellentesque lobortis id enim ac tincidunt. Mauris eget auctor est. Ut ac dolor elit. Praesent nisi orci, aliquam quis leo in, adipiscing egestas nibh. Suspendisse eget urna venenatis, feugiat odio eget, congue orci. Duis faucibus laoreet neque, nec consequat diam fringilla cursus. Nulla scelerisque laoreet purus ac molestie. Pellentesque fermentum a felis at bibendum. Donec dapibus, velit vitae ultrices adipiscing, massa justo faucibus sem, quis auctor neque tortor consequat nisl. Sed hendrerit nisl eget nibh ultricies pretium.
-
-		Nulla facilisi. Praesent aliquet non nulla nec hendrerit. Phasellus suscipit mi at est lacinia rhoncus. Donec non ultricies purus. Aliquam eu tempor orci. Aliquam a dignissim nunc. Nam tincidunt magna odio, vitae tincidunt dui euismod sed. Ut sed fermentum arcu. Nam mollis lobortis egestas. In hac habitasse platea dictumst. Mauris congue imperdiet eros, eu imperdiet tellus convallis ac. Aenean volutpat augue ut odio dictum, nec placerat ipsum rhoncus. Maecenas tempus elementum sapien ut pharetra.
-
-		Pellentesque leo neque, accumsan faucibus viverra facilisis, vulputate ut nulla. Aenean et ligula nunc. Proin eros augue, vulputate dictum sem sed, elementum condimentum elit. Morbi tristique nisi eget vehicula commodo. In ac egestas arcu, eget feugiat sapien. Suspendisse ut sem mauris. Nam leo libero, lobortis sed lectus eu, lacinia fermentum elit. Aliquam fermentum, velit quis sagittis pretium, dui arcu lacinia diam, sed porta justo purus ut augue. Aenean sagittis bibendum mattis. Sed fringilla semper eros id varius. Curabitur tempor arcu sem, sit amet semper turpis rhoncus vel. Ut nec consectetur eros.
-
-		Sed tincidunt, dolor in tincidunt dignissim, libero lorem egestas nisi, eu commodo elit dolor aliquam tortor. Phasellus sed diam et velit dictum consequat. Integer dui nibh, sagittis vel nisi vitae, tincidunt dignissim odio. Etiam non luctus ligula. Vestibulum mattis, nisi ac volutpat dignissim, eros enim gravida neque, sit amet pellentesque mi purus non diam. Nam id arcu augue. Praesent eget quam et dui tincidunt varius. Vestibulum eleifend vulputate augue ut consequat. Sed ultricies metus odio, ut luctus lacus consectetur at. Lorem ipsum dolor sit amet, consectetur adipiscing elit
-        </div>
+	      <br />
 		
-        <div id="output"></div>
-
-		<div class="col-lg-2">
-          <h4>Advertising??</h4>
-        </div>
-      </div>
-
-      <div class="footer">
-        <p>&copy; Entaria 2014</p>
+	  </div>
+		
+	  <div id="output"></div>
+      
+      <div class="footer">		
+			<p>&copy; Entaria 2014</p>
       </div>
 
 	 </div>
-     
+        <script src="js/angular-controllers.js"></script>
         <script src="js/vendor/jquery-1.10.2.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 		<script src="js/vendor/bootstrap.min.js"></script>
+		
+
+
 
         <!-- HK1 CODE -->
         <script type="text/javascript" src="js/hk1.js"></script>
@@ -289,7 +309,6 @@
             ga('create','UA-42936379-2');ga('send','pageview');
         </script>
         <!-- HK1 CODE -->
-
-
+		
     </body>
 </html>

@@ -1,4 +1,4 @@
-﻿!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 
 
@@ -17,17 +17,28 @@
 
     <body>
 
-        <form ng-app ng-controller=" APICallController">
+        <form ng-app ng-controller="APICallController">
+
+
             <h1>Current Balance</h1>
             <ul>
 
-                <li ng-repeat="balance in ClientCardBalance.Balances" ng-click="toggleActive(balance)" ng-class="{active:balance.active}">
-			<!-- Notice the use of the currency filter, it will format the price -->
-			{{balance.ClientId}} <span>{{balance.pointbalance.price}}</span>
-		</li>
+  <!--              <li ng-repeat="ClientCardBalance in CBs" > -->
+                   
+			<!-- display points balances for this particular user -->
+	<!-- 		{{ClientCardBalance.CardId}} <span>  {{ClientCardBalance.ClientCardBalanceId}} </span><span>{{ClientCardBalance.ClientId}}</span> <span>{{ClientCardBalance.PointsBalance}}</span> -->
+	
+                {{CBs.CardId}} <span>  {{CBs.ClientCardBalanceId}} </span><span>{{CBs.ClientId}}</span> <span>{{CBs.PointsBalance}}</span>
+
+                 <!--   	</li> -->
                
 
             </ul>
+            <div class="total">
+
+
+                 Total: <span>{{Balance()}}</span> 
+            </div>
 
                     </form>
 
